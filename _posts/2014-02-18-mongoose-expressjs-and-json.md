@@ -1,18 +1,19 @@
 ---
 layout: post
-title: First Server Crash
+title: How I solved my first server crash @ lab.sokratik.com
 cover: expressmongoose.jpg
 date:   2014-02-18 12:00:00
 categories: posts
 ---
 
 Our first beta product [lab.sokratik.com] (http://lab.sokratik.com) uses two nodejs servers, one of them is a binaryjs
-socket which is a wrapper around amazon s3 the other powers all the html you see on your browser. This is an expressjs
+socket which is a wrapper around amazon s3, the other powers all the html you see on your browser. This is an expressjs
 application sitting behind nginx and talking to browser and mongolab. The server architecture is based on [mean]
 (http://mean.io) . If you are writing a new application, I would strongly recommend building your code on top of mean.
 Having spent considerable time writing javascript, I zeroed in on angularjs for my frontend framework. Without going into
 merits of why chose this technology over other, I can say that any angularjs application talks in the language of json.
-My experience with server crashes also dictated that I use [forever] (https://github.com/nodejitsu/forever). When a server goes down even more important than finding
+My experience with server crashes also dictated that I use [forever] (https://github.com/nodejitsu/forever).
+When a server goes down even more important than finding
 why it went down is to bring the server up.
 
 Essentially the flow of data in our architecture looks like this
@@ -42,7 +43,8 @@ times(very rarely) **garbage data(null)** creeps in.So we might have a object li
      property3: [{college:'IITKGP'},{college:'IITB'},null,{college:'IITKGP'}]}
 {% endhighlight %}
 
-This works well when we sent from browser, data gets corrupted but server is safe. But the moment we hit mongoose, our
+This works well for the loop between server and browser, data gets corrupted but server is safe.
+ But the moment we hit mongoose, our
 expressjs server breaks down and node-forever does not even try to revive the server.
  As a self respecting start up techie, I have not tried to fix the root cause but hacked my
 way out of trouble. All you have to do is to avoid passing nulls where you expect a javascript object from going to json.
