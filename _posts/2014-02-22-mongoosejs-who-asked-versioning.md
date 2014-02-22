@@ -2,7 +2,7 @@
 layout: post
 title: Dealing with unwanted  versioning in mongoosejs
 cover: versioning.png
-date:   2014-02-18 12:00:00
+date:   2014-02-22 12:00:00
 categories: posts
 ---
 [Mongodb] (http://www.mongodb.org/) and [expressjs] (http://expressjs.com/) connected via [mongoosejs]
